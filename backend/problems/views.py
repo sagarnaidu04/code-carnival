@@ -13,6 +13,22 @@ from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from pathlib import Path
+from django.http import JsonResponse
+from django.contrib.auth import get_user_model
+
+def create_admin(request):
+    User = get_user_model()
+
+    if User.objects.filter(username="admin").exists():
+        return JsonResponse({"message": "Admin already exists"})
+
+    User.objects.create_superuser(
+        username="admin",
+        email="admin@example.com",
+        password="Admin@123"
+    )
+
+    return JsonResponse({"message": "Admin created successfully"})
 
 def seed_database(request):
     User = get_user_model()
