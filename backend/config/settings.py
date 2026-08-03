@@ -187,7 +187,7 @@ SPECTACULAR_SETTINGS = {
 }
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://your-project.vercel.app",
+    "https://code-carnival.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

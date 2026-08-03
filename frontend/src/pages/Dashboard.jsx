@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
 import Navbar from "../components/Navbar";
+import { toast } from "react-toastify";
 
 function Dashboard() {
     const [dashboard, setDashboard] = useState(null);
