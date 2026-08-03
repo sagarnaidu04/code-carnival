@@ -9,6 +9,25 @@ from .models import Boilerplate
 from .serializers import BoilerplateSerializer
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from django.http import JsonResponse
+from django.contrib.auth import get_user_model
+from django.conf import settings
+from pathlib import Path
+
+def seed_database(request):
+    User = get_user_model()
+
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser(
+            username="admin",
+            email="admin@example.com",
+            password="Admin@123"
+        )
+
+    seed_file = Path(settings.BASE_DIR) / "seed_problems.py"
+    exec(seed_file.read_text(encoding="utf-8"), {})
+
+    return JsonResponse({"status": "success"})
 
 
 class BoilerplateListView(APIView):
